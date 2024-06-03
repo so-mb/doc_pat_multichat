@@ -30,7 +30,7 @@ def read_command(prompt):
     stdscr.clrtoeol()
     return command
 
-def print_message(message, prompt="> "):
+def print_message(message, prompt="Me> "):
     global stdscr, output_lines
     output_lines.append(message)
     if len(output_lines) >= curses.LINES - 2:

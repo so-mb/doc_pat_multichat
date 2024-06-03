@@ -1,5 +1,3 @@
-# chat_client.py
-
 import socket
 import threading
 import sys
@@ -31,16 +29,11 @@ def receive_messages():
     while True:
         try:
             data_length = int.from_bytes(client_socket.recv(HEADER_LENGTH), byteorder='big')
-            if not data_length:
-                break
             data = client_socket.recv(data_length).decode('utf-8')
             message = json.loads(data)
 
             if message['type'] == 'chat':
-                if message['nick'] == nickname:
-                    print_message(f"Me: {message['message']}")
-                else:
-                    print_message(f"{message['nick']}: {message['message']}")
+                print_message(f"{message['nick']}: {message['message']}")
             elif message['type'] == 'join':
                 print_message(f"*** {message['nick']} has joined the chat")
             elif message['type'] == 'leave':
@@ -51,9 +44,9 @@ def receive_messages():
 
 # Function to send messages to the server
 def send_message():
-    print_message(f"You are chatting as {nickname}", f"{nickname}> ")
+    print_message(f"***You are chatting as << {nickname} >>", f"{nickname}> ")
     while True:
-        message = read_command(f"{nickname}> ")
+        message = read_command(f"Me> ")
         if message.strip() == "":
             continue
         if message.startswith('/q'):
