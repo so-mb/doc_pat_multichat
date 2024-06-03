@@ -37,7 +37,10 @@ def receive_messages():
             message = json.loads(data)
 
             if message['type'] == 'chat':
-                print_message(f"{message['nick']}: {message['message']}")
+                if message['nick'] == nickname:
+                    print_message(f"Me: {message['message']}")
+                else:
+                    print_message(f"{message['nick']}: {message['message']}")
             elif message['type'] == 'join':
                 print_message(f"*** {message['nick']} has joined the chat")
             elif message['type'] == 'leave':
@@ -48,6 +51,7 @@ def receive_messages():
 
 # Function to send messages to the server
 def send_message():
+    print_message(f"You are chatting as {nickname}", f"{nickname}> ")
     while True:
         message = read_command(f"{nickname}> ")
         if message.strip() == "":
@@ -58,8 +62,8 @@ def send_message():
 
         chat_packet = json.dumps({"type": "chat", "message": message})
         client_socket.send(len(chat_packet).to_bytes(HEADER_LENGTH, byteorder='big') + chat_packet.encode('utf-8'))
-        # Show the message in the sender's terminal as well
-        print_message(f"{nickname}: {message}")
+        # Show the message in the sender's terminal as "Me"
+        print_message(f"Me: {message}")
 
     client_socket.close()
     end_windows()

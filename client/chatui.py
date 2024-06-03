@@ -30,7 +30,7 @@ def read_command(prompt):
     stdscr.clrtoeol()
     return command
 
-def print_message(message):
+def print_message(message, prompt="> "):
     global stdscr, output_lines
     output_lines.append(message)
     if len(output_lines) >= curses.LINES - 2:
@@ -39,5 +39,5 @@ def print_message(message):
     stdscr.clear()
     for i, line in enumerate(output_lines):
         stdscr.addstr(i, 0, line)
-    stdscr.addstr(curses.LINES-1, 0, "> ")  # Re-display prompt
+    stdscr.addstr(curses.LINES-1, 0, prompt)  # Re-display prompt
     stdscr.refresh()
