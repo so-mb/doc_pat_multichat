@@ -62,7 +62,7 @@ while True:
                 if client != client_socket:
                     client.send(len(join_message).to_bytes(HEADER_LENGTH, byteorder='big') + join_message.encode('utf-8'))
             
-            print(f"Accepted new connection from {client_address[0]}:{client_address[1]} with username: {user}")
+            print(f"+++ Accepted new connection from {client_address[0]}:{client_address[1]} with username: {user}")
 
         else:
             message = receive_data(notified_socket)
@@ -77,7 +77,7 @@ while True:
                 for client in clients.keys():
                     client.send(len(leave_message).to_bytes(HEADER_LENGTH, byteorder='big') + leave_message.encode('utf-8'))
                 
-                print(f"Closed connection from {notified_socket.getpeername()}")
+                print(f"--- Closed connection from {notified_socket.getpeername()} with username: {user}")
                 continue
 
             # Broadcast received message to other clients
