@@ -15,19 +15,22 @@ if len(sys.argv) != 2:
 
 port = int(sys.argv[1])
 
+# Get the IP address of the server machine
+hostname = socket.gethostname()
+local_ip = socket.gethostbyname(hostname)
+print(f"Server IP Address: {local_ip}")
+
 # Create a listener socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.bind(('', port))
+server_socket.bind((local_ip, port))
 server_socket.listen()
 
-# List of sockets to monitor with select()
+# List of sockets to monitor with select
 sockets_list = [server_socket]
-
-# Dictionary to store buffers for each client
 clients = {}
 
-print(f"Server listening on port {port}...")
+print(f"Server is listening on {local_ip}:{port}")
 
 # Function to handle receiving data from clients
 def receive_data(client_socket):
