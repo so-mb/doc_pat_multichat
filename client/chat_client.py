@@ -44,7 +44,7 @@ def receive_messages():
 
 # Function to send messages to the server
 def send_message():
-    print_message(f"*** You are chatting as << {nickname} >>", f"{nickname}> ")
+    print_message(f"*** Welcome to the DP Chat. Remember to chat responsibly. You are chatting as << {nickname} >>", f"{nickname}> ")
     while True:
         message = read_command(f"Me> ")
         if message.strip() == "":
