@@ -1,4 +1,4 @@
-# chat_server.py
+# CHAT SERVER IMPLEMENTATION
 
 import socket
 import select

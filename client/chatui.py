@@ -1,4 +1,4 @@
-# chatui.py
+# CHAT UI IMPLEMENTATION
 
 import curses
 
