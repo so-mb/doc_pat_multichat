@@ -46,9 +46,13 @@ This project is a multiuser chat application designed to facilitate secure and e
      Look for the "inet" address under your active network connection.
 
 2. Run the server script with the desired port number:
+   ```
    python chat_server.py <port>
+   ```
    Example:
+   ```
    python chat_server.py 12345
+   ```
    The server will print its local IP address. Share this address and the port number with your classmates.
 
 #### Running the Client
