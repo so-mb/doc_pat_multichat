@@ -49,9 +49,14 @@ def send_message():
         message = read_command(f"Me> ")
         if message.strip() == "":
             continue
-        if message.startswith('/q'):
-            print("*** Quitting chat")
-            break
+        if (message == "/quit" or message == "/QUIT"):
+            confirmation = read_command("Are you sure you want to quit? [Yes or y / No or n (default)] ")
+            if confirmation.lower() in ["yes", "y"]:
+                print("*** Quitting chat")
+                break
+            else:
+                print_message("*** DP Chat says 'Quit cancelled.'", f"{nickname}> ")
+                continue
 
         chat_packet = json.dumps({"type": "chat", "message": message})
         client_socket.send(len(chat_packet).to_bytes(HEADER_LENGTH, byteorder='big') + chat_packet.encode('utf-8'))
